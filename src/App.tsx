@@ -2,12 +2,14 @@ import { Routes, Route } from "react-router-dom"
 import { Store } from "./pages/Store"
 import { Nav } from "./components/Nav"
 import { Cart } from "./pages/Cart"
+import { CartProvider } from "./context/CartContext"
 import categories from './data/categories.json'
 
 function App() {
 
   return (
-    <div className="flex flex-col items-center">
+    <CartProvider>
+      <div className="flex flex-col items-center">
       <Nav />
       <div className="bg-gray-50 w-full">
         <Routes>
@@ -22,6 +24,7 @@ function App() {
         </Routes>
       </div>
     </div>
+    </CartProvider>
   )
 }
 

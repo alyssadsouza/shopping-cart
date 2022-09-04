@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import items from "../data/items.json";
+import storeItems from "../data/items.json";
 import { printPrice } from "../utils/currency";
 import { truncateText } from "../utils/truncateText";
 import {
@@ -7,12 +7,25 @@ import {
   MinusCircleIcon,
   PlusCircleIcon,
 } from "@heroicons/react/24/outline";
+import { useShoppingCart } from "../context/CartContext";
 
-export interface StoreProps {
+type StoreProps = {
   preview?: boolean;
-}
+};
 
 export function Cart({ preview }: StoreProps) {
+  const {
+    cartItems,
+    getCartItemsFromStore,
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+    getCartTotal
+  } = useShoppingCart();
+
+  const items = getCartItemsFromStore();
+
   return (
     <div className="overflow-auto p-[5%] bg-white">
       <h1 className="font-bold text-3xl">Your Cart</h1>
@@ -34,21 +47,32 @@ export function Cart({ preview }: StoreProps) {
                     {preview ? truncateText(50, item.desc) : item.desc}
                   </p>
                 </div>
-                <TrashIcon className={`${preview ? 'w-6 h-6' : 'w-8 h-8'} m-0 cursor-pointer text-gray-400 hover:text-gray-600 transition-all`} />
+                <TrashIcon
+                  onClick={() => removeFromCart(item.id)}
+                  className={`${
+                    preview ? "w-6 h-6" : "w-8 h-8"
+                  } m-0 cursor-pointer text-gray-400 hover:text-gray-600 transition-all`}
+                />
               </div>
               <div className="flex flex-row items-center justify-between w-full m-[2%]">
                 <div>
-                  <p className="text-sm">Quantity:</p>
+                  <p className={`${preview ? "text-xs" : "text-sm"}`}>
+                    Quantity:
+                  </p>
                   <div className="flex flex-row items-center justify-between">
-                    <MinusCircleIcon className="w-5 h-5 mr-2 cursor-pointer text-gray-400 hover:text-gray-600 transition-all" />
-                    <p>1</p>
-                    <PlusCircleIcon className="w-5 h-5 ml-2 cursor-pointer text-gray-400 hover:text-gray-600 transition-all" />
+                    <MinusCircleIcon onClick={() => decreaseCartQuantity(item.id)} className="w-5 h-5 mr-2 cursor-pointer text-gray-400 hover:text-gray-600 transition-all" />
+                    <p className="text-sm">{getItemQuantity(item.id)}</p>
+                    <PlusCircleIcon onClick={() => increaseCartQuantity(item.id)} className="w-5 h-5 ml-2 cursor-pointer text-gray-400 hover:text-gray-600 transition-all" />
                   </div>
                 </div>
                 <div>
-                  <p className="text-sm mt-4 text-right">Cost:</p>
+                  <p
+                    className={`text-right ${preview ? "text-xs" : "text-sm"}`}
+                  >
+                    Cost:
+                  </p>
                   <h3 className="font-bold text-gray-500">
-                    {printPrice(item.price)}
+                    {printPrice(item.price * getItemQuantity(item.id))}
                   </h3>
                 </div>
               </div>
@@ -59,7 +83,7 @@ export function Cart({ preview }: StoreProps) {
       <div className="flex flex-row items-center justify-end w-full my-[5%]">
         <h3 className="text-lg text-right">Your total:</h3>
         <h2 className="font-bold text-2xl text-right mx-2">
-          {printPrice(42.99)}
+          {printPrice(getCartTotal())}
         </h2>
       </div>
       {!preview && (

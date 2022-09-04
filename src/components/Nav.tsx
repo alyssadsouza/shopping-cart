@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Cart } from "../pages/Cart";
 import categories from "../data/categories.json";
+import { useShoppingCart } from "../context/CartContext";
 
 const navigation = categories.sort((a, b) => {
   if (a.category.toLowerCase() > b.category.toLowerCase()) {
@@ -23,6 +24,8 @@ function classNames(...classes: Array<String>) {
 }
 
 export function Nav() {
+  const { cartQuantity } = useShoppingCart();
+
   const currentPath = useLocation()?.pathname;
 
   return (
@@ -46,12 +49,12 @@ export function Nav() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="./vite.svg"
+                    src="./logo.svg"
                     alt="Store Company"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="./vite.svg"
+                    src="./logo.svg"
                     alt="Store Company"
                   />
                 </div>
@@ -84,9 +87,11 @@ export function Nav() {
                     <Menu.Button className="flex rounded-full text-xs focus:outline-none">
                       <span className="sr-only">Open user menu</span>
                       <ShoppingCartIcon className="block h-6 w-6 text-gray-600 outline outline-1 outline-gray-300 hover:outline-gray-400 transition-all outline-offset-8 rounded-full" />
-                      <div className="absolute bottom-0 right-0 translate-x-[0.5rem] translate-y-[0.5rem] w-4 h-4 bg-red-500 text-white rounded-full text-[0.6rem]">
-                        3
-                      </div>
+                      {cartQuantity > 0 && (
+                        <div className="absolute bottom-0 right-0 translate-x-[0.5rem] translate-y-[0.5rem] w-4 h-4 bg-red-500 text-white rounded-full text-[0.6rem]">
+                          {cartQuantity}
+                        </div>
+                      )}
                     </Menu.Button>
                   </div>
                   <Transition

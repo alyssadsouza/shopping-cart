@@ -2,21 +2,25 @@ import { Link } from "react-router-dom";
 import { printPrice } from "../utils/currency";
 import { truncateText } from "../utils/truncateText";
 import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
+import { useShoppingCart } from "../context/CartContext";
 
-export interface ItemProps {
+type ItemProps = {
   item: Item;
-}
+};
 
-export interface Item {
+export type Item = {
   id: number;
   name: string;
   price: number;
   imgUrl: string;
   category: string;
   desc: string;
-}
+};
 
 export function Item({ item }: ItemProps) {
+  const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity } = useShoppingCart();
+  const quantity = getItemQuantity(item.id);
+
   return (
     <div
       key={item.id}
@@ -30,19 +34,19 @@ export function Item({ item }: ItemProps) {
             <p className="text-xs">{truncateText(50, item.desc)}</p>
           </div>
         </div>
-        <h3 className="font-bold text-gray-500 text-lg my-4 w-full text-right">{printPrice(item.price)}</h3>
+        <h3 className="font-bold text-gray-500 text-lg my-4 w-full text-right">
+          {printPrice(item.price)}
+        </h3>
         <div className="flex flex-row items-center justify-between w-full mx-[2%]">
           <div>
             <p className="text-xs">Quantity:</p>
             <div className="flex flex-row items-center justify-between">
-              <MinusCircleIcon className="w-5 h-5 mr-2 cursor-pointer text-gray-400 hover:text-gray-600 transition-all" />
-              <p>1</p>
-              <PlusCircleIcon className="w-5 h-5 ml-2 cursor-pointer text-gray-400 hover:text-gray-600 transition-all" />
+              <MinusCircleIcon onClick={() => decreaseCartQuantity(item.id)} className="w-5 h-5 mr-2 cursor-pointer text-gray-400 hover:text-gray-600 transition-all" />
+              <p>{quantity}</p>
+              <PlusCircleIcon onClick={() => increaseCartQuantity(item.id)} className="w-5 h-5 ml-2 cursor-pointer text-gray-400 hover:text-gray-600 transition-all" />
             </div>
           </div>
-          <div
-            className="block px-4 py-2 w-fit text-sm bg-indigo-300 text-white border border-indigo-300 hover:bg-white hover:text-indigo-400 transition-all"
-          >
+          <div onClick={() => increaseCartQuantity(item.id)} className="cursor-pointer block px-4 py-2 w-fit text-sm bg-indigo-300 text-white border border-indigo-300 hover:bg-white hover:text-indigo-400 transition-all">
             Add to Cart
           </div>
         </div>
