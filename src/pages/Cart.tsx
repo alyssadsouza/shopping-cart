@@ -40,7 +40,7 @@ export function Cart({ preview }: StoreProps) {
               className={`mr-4 ${preview ? "w-32 h-32" : "w-64 h-64"}`}
             ></img>
             <div className="flex flex-col items-start justify-between w-full">
-              <div className="flex flex-row justify-between items-center">
+              <div className="flex flex-row justify-between items-center w-full">
                 <div className="flex flex-col items-start justify-start mx-[2%] w-full">
                   <h2 className="font-bold">{item.name}</h2>
                   <p className="text-xs">
