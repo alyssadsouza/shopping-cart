@@ -1,0 +1,26 @@
+[
+    {
+        "category": "All",
+        "path": "/"
+    },
+    {
+        "category": "Home",
+        "path": "/home"
+    },
+    {
+        "category": "Grocery",
+        "path": "/grocery"
+    },
+    {
+        "category": "Auto",
+        "path": "/auto"
+    },
+    {
+        "category": "Books",
+        "path": "/books"
+    },
+    {
+        "category": "Electronics",
+        "path": "/electronics"
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+      "id": 1,
+      "name": "Book",
+      "price": 10.99,
+      "imgUrl": "https://cdn.shopify.com/s/files/1/0064/5342/8271/files/BESOCF_Instal_1200_2048x2048.jpg?v=1633448644",
+      "category": "Books",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto maxime officiis accusamus neque, ullam ex, fuga aliquam repudiandae iste quibusdam ratione ipsam."
+    },
+    {
+      "id": 2,
+      "name": "Computer",
+      "price": 1199,
+      "imgUrl": "https://i5.walmartimages.com/dfw/4ff9c6c9-8df0/k2-_8cda5166-1c1f-4abd-8eec-32fe6a9f9b53.v1.jpg",
+      "category": "Electronics",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto maxime officiis accusamus neque, ullam ex, fuga aliquam repudiandae iste quibusdam ratione ipsam."
+    },
+    {
+      "id": 3,
+      "name": "Banana",
+      "price": 1.05,
+      "imgUrl": "https://cdn1.sph.harvard.edu/wp-content/uploads/sites/30/2018/08/bananas-1354785_1920.jpg",
+      "category": "Grocery",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto maxime officiis accusamus neque, ullam ex, fuga aliquam repudiandae iste quibusdam ratione ipsam."
+    },
+    {
+      "id": 4,
+      "name": "Car",
+      "price": 14000,
+      "imgUrl": "https://www.cnet.com/a/img/resize/3bed9f4c67a19635dc6b74669b3273097b3b7006/2021/09/02/da67e9fb-8b4a-4b7e-a419-c77c4242be6e/elantra-ogi.jpg?auto=webp",
+      "category": "Auto",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto maxime officiis accusamus neque, ullam ex, fuga aliquam repudiandae iste quibusdam ratione ipsam."
+    }
+  ]
